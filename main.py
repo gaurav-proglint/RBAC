@@ -1,15 +1,11 @@
-from fastapi import FastAPI, Depends, HTTPException, status,Body
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-#from jose import JWTError
+from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 import jwt
 from passlib.context import CryptContext
 from typing import Optional
 import models
-import hashlib
-import bcrypt
 from database import engine
 from crud import get_user
-from sqlalchemy import text
 from database import get_db
 models.Base.metadata.create_all(bind=engine)
 
