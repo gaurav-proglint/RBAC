@@ -11,7 +11,7 @@ from database import engine
 #from starlette.requests import FormData
 from starlette.datastructures import FormData
 import io
-from crud import get_user
+from crud import get_user,insert_token
 from database import get_db
 from pydantic import BaseModel
 models.Base.metadata.create_all(bind=engine)
@@ -103,6 +103,8 @@ async def login_for_access_token(data:OAuth2PasswordRequestForm = Depends()):
     access_token_expires=timedelta(minutes=15)
     access_token = create_access_token(data={"sub": user.username, "role": user.role},
                                        expires_delta=access_token_expires)
+    db=get_db()
+    token=insert_token(db,id=user.id,token=access_token)
     return {"access_token": access_token, "token_type": "bearer"}
 
 

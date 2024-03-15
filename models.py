@@ -9,3 +9,7 @@ class User(Base):
   role= Column(String)
   hashed_password =Column(String)
 
+class Token(Base):
+  __tablename__='Tokens'
+  id=Column(Integer,primary_key=True)
+  token=Column(String)
